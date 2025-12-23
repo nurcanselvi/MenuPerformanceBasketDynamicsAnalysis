@@ -25,6 +25,7 @@ The project examines how revenue is formed across basket sizes, product roles, a
 
 ### 📖 Dataset Description
 > The dataset consists of 1,000 item-level transactions recorded between **April 2022** and **March 2023**, where each row represents a single order. Key columns include item details (item_name, item_price), order metrics (quantity, transaction_amount), and temporal/operational context (date, time_of_sale, transaction_type).
+>
 
 > **📎 Data Source:** Kaggle – (https://www.kaggle.com/datasets/rajatsurana979/fast-food-sales-report)
 >
@@ -62,3 +63,30 @@ The project examines how revenue is formed across basket sizes, product roles, a
 
 ---
 
+## II. Business Insights
+
+> This section presents the key business insights derived from the analysis. Each insight is based on a specific business question, and I approached these questions step by step, using the result of one analysis to guide the next, with clearly defined aliases ensuring that each metric’s context and interpretation remain unambiguous throughout the narrative. This way, the insights build into a clear and connected story rather than standing alone.
+>
+
+### 🧠 Analysis Steps
+> ### 🔍 Initial Data Exploration
+Before deep-diving into analysis, I validated the dataset's scope and granularity.
+
+```sql
+-- Step 1: View the sales table
+SELECT TOP 10 *
+FROM sales; 
+
+-- Step 1.1: What date range does this dataset cover?
+SELECT 
+    MIN(date) AS start_date, 
+    MAX(date) AS end_date
+FROM sales; 
+-- Result: April 2022 - March 2023
+
+-- Step 1.2: What is the relationship between rows and orders?
+SELECT 
+    COUNT(*) AS total_transaction_rows,
+    COUNT(DISTINCT order_id) AS total_orders
+FROM sales;  
+-- Insight: Data is recorded at the item-level.
