@@ -137,7 +137,7 @@ FROM sales;
 
 🔑 An average basket size of ~8 items suggests that customer purchases are structurally multi-item, making order-level performance highly sensitive to basket composition rather than individual item selection.
 >
-🌟** Why it matters:**  With consistent item pricing, multi-item baskets imply that variation in order revenue is primarily **driven by basket composition,** not price fluctuations — justifying a shift toward item-level and basket-structure analysis.
+**🌟 Why it matters:** With consistent item pricing, multi-item baskets imply that variation in order revenue is primarily **driven by basket composition,** not price fluctuations — justifying a shift toward item-level and basket-structure analysis.
 
 ---
 
@@ -169,7 +169,7 @@ FROM sales;
 
 🔑  Large-basket orders (7+ items) represent ~61% of total orders and account for ~84% of total revenue, **making them the dominant driver of revenue in the system.**
 >
-🌟** Why it matters:** Knowing that most sales come from big orders helps focus on menu planning, pricing, and staffing during busy periods.
+**🌟 Why it matters:** Knowing that most sales come from big orders helps focus on menu planning, pricing, and staffing during busy periods.
 
 ---
 
