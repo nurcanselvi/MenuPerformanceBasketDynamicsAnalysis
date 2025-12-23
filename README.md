@@ -188,5 +188,88 @@ FROM sales;
 
 **🌟 Why it matters:** This distinction between **volume drivers** and **basket fillers** is key for **understanding product-level contributions** within the menu and informs **menu planning** and **promotions.**
 
+---
+
+```sql
+  -- Step 2.2: Which items generate the highest revenue within each category?
+		SELECT item_name, item_type, 
+		SUM(transaction_amount) AS total_item_revenue,
+		COUNT(*) AS order_frequency
+		FROM sales
+		GROUP BY item_type, item_name
+		ORDER BY total_item_revenue DESC;
+```
+<img width="443" height="209" alt="step 2 2 screenshot" src="https://github.com/user-attachments/assets/9e4a152b-bb9c-4ac4-a28e-9c24fb9aa358" />
+
+🔑High-revenue items like Sandwich contribute disproportionately to total sales despite lower order frequency, indicating **revenue concentration risk** and **pricing leverage points** within the menu.
+
+**🌟 Why it matters:**  Prioritizing **menu focus, pricing strategy, and inventory allocation** ensures efforts target products that truly **impact sales performance**.
+
+---
+
+```sql
+-- Step 2.3: How are items positioned relative to their category’s average price?
+        SELECT item_type, item_name, item_price,
+        AVG(item_price) OVER(PARTITION BY item_type) AS category_avg_price,
+        item_price - AVG(item_price) OVER(PARTITION BY item_type) AS price_diff_from_category_avg
+        FROM sales
+        GROUP BY item_type, item_name, item_price
+        ORDER BY item_type, price_diff_from_category_avg DESC;
+```
+<img width="588" height="192" alt="step 2 3 screenshot" src="https://github.com/user-attachments/assets/51fa48c2-01e3-4351-8a41-75cc0c4e70da" />
+
+🔑  Lower-priced items like **Panipuri**, which rank among the top volume drivers, are priced below their category average, indicating a deliberate strategy to drive order frequency and basket expansion. In contrast, **Sandwich** and **Cold coffee** are positioned well above category averages, acting as premium anchors that lift revenue per order.
+
+**🌟 Why it matters:** This pricing structure reveals **distinct product roles within the menu.  Low-priced, high-volume items** stimulate demand and encourage larger baskets. **Premium-priced items** concentrate revenue and improve order value.  Understanding these roles helps evaluate **which items should be protected for volume**, and **which items have leverage for pricing or margin optimization** without harming demand.
+
+---
+
+```sql
+--Step 3.1: How is total sales performance distributed across dayparts?
+    SELECT time_of_sale AS daypart,
+		SUM(transaction_amount) AS total_revenue_for_daypart, 
+		SUM(quantity) AS items_sold_for_daypart,
+    COUNT(*) AS orders_count_for_daypart,
+		CAST(SUM(transaction_amount) * 100.0 / SUM(SUM(transaction_amount)) OVER () AS DECIMAL(5,2)) 
+    AS revenue_share_pct
+		FROM sales
+    GROUP BY time_of_sale
+    ORDER BY total_revenue_for_daypart DESC;
+```
+<img width="695" height="141" alt="step 3 1 screenshot" src="https://github.com/user-attachments/assets/083f7cf3-3706-4237-9b4f-d04ab19f3323" />
+
+🔑 Sales performance is **not evenly distributed across the day.** A single time window (night, after consolidation) accounts for a **disproportionate share of total revenue**, confirming that overall business performance is **time-concentrated rather than time-balanced.**
+
+**🌟 Why it matters:**  This identifies **when the business is most exposed.** Any operational issue, pricing change, or product disruption during this period will have an **outsized impact on total results.**
+
+---
+
+```sql
+-- Step 3.2: How is nighttime revenue and volume distributed across products?
+       SELECT  item_name, item_type,
+       SUM(transaction_amount) AS night_revenue,
+       CAST( SUM(transaction_amount) * 100.0 / SUM(SUM(transaction_amount)) OVER () AS DECIMAL(5,2)) 
+	   AS night_revenue_share_pct,
+       SUM(quantity) AS night_units_sold,
+       CAST( SUM(quantity) * 100.0 / SUM(SUM(quantity)) OVER () AS DECIMAL(5,2)) 
+	   AS night_unit_share_pct
+       FROM sales
+       WHERE time_of_sale = 'Night'
+       GROUP BY item_name, item_type
+       ORDER BY night_revenue DESC;
+```
+<img width="702" height="200" alt="step 3 2 secreenshot" src="https://github.com/user-attachments/assets/11934908-1801-4ab7-8b37-4ac554daf144" />
+
+🔑 Nighttime revenue concentration is not driven by higher order counts but by **product mix**. A small number of items — notably *Sandwich* and *Frankie* — contribute a **disproportionately large share of revenue relative to their unit volume**, while other popular items mainly act as **basket fillers** with lower revenue weight.
+
+**🌟 Why it matters:** This clarifies **what kind of risk the night period carries**. Performance is **exposed to price-anchoring items rather than pure volume items**, meaning:
+
+- Revenue sensitivity is higher to **pricing, availability, or margin changes** in a few key products.
+- Any **pricing experiment,** **promotion, or supply issue** affecting these revenue-heavy items will have an **outsized impact on total night revenue.**
+
+
+
+
+
 
 
