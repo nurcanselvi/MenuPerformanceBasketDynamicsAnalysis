@@ -76,7 +76,7 @@ FROM sales;
 ```
 <img width="931" height="252" alt="step 1 screenshot" src="https://github.com/user-attachments/assets/674491e0-41d8-4b85-ba95-31e5f3a02fb6" />
 
-
+```sql
 -- Step 1.1: What date range does this dataset cover?
 SELECT 
     MIN(date) AS start_date, 
