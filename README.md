@@ -9,4 +9,12 @@ The project examines how revenue is formed across basket sizes, product roles, a
 
 > Rather than listing descriptive metrics, the analysis is structured to reveal **where the business earns its money and under which conditions**, creating a foundation for pricing, menu focus, and operational timing decisions.
 >
+
 ---
+
+### 🎯 Project Objective
+> > The objective of this project is to use SQL-based analysis to identify the primary drivers of sales performance — distinguishing between **order volume**, **basket size**, **product-level contribution** within the menu, and **time-of-day effects.**
+> 
+
+> The goal is not to predict outcomes, but to clarify **where performance is structurally coming from,** enabling more informed decisions around menu prioritization and operating focus.
+>
