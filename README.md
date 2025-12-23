@@ -1,4 +1,4 @@
-# 🍔 MenuPerformanceBasketDynamicsAnalysis
+# 🍔MenuPerformanceBasketDynamicsAnalysis
 The project examines how revenue is formed across basket sizes, product roles, and dayparts, translating item-level transactions into structured business insights.
 
 ---
@@ -47,5 +47,15 @@ The project examines how revenue is formed across basket sizes, product roles, a
 | :--- | :--- | :--- |
 | **Database** | Microsoft SQL Server (MSSQL) | Querying and analyzing transactional sales data using T-SQL. |
 | **Interface** | SQL Server Management Studio (SSMS) | Writing, testing, and organizing SQL scripts. |
+>
 
+---
+### 🔍 SQL Concepts & Techniques Used
+* **Data Integrity:** Standardized inconsistent transaction types and consolidated overlapping time segments to ensure analytical accuracy.
+* **Performance Metrics:** Leveraged `COUNT`, `SUM`, and `AVG` with `GROUP BY` to decouple order frequency from basket size and revenue impact.
+* **Behavioral Segmentation:** Applied `CASE WHEN` logic to categorize basket sizes, shifting the focus from raw transactions to customer behavior patterns.
+* **Relative Performance:** Utilized **Window Functions** (`OVER`) to calculate revenue/unit shares and price positioning without losing data granularity.
+* **Contextual Analysis:** Implemented `WHERE` filtering to isolate specific operational windows (e.g., Nighttime Sales) for targeted performance insights.
+* **Semantic Precision:** Used strategic aliasing to distinguish identical metrics across different business scopes (e.g., total vs. segmented revenue).
 
+---
