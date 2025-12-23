@@ -1,4 +1,4 @@
-# 🍔MenuPerformanceBasketDynamics
+# 🍔 MenuPerformanceBasketDynamics
 The project examines how revenue is formed across basket sizes, product roles, and dayparts, translating item-level transactions into structured business insights.
 
 ---
@@ -75,6 +75,9 @@ SELECT TOP 10 *
 FROM sales; 
 ```
 <img width="931" height="252" alt="step 1 screenshot" src="https://github.com/user-attachments/assets/674491e0-41d8-4b85-ba95-31e5f3a02fb6" />
+🔑 A quick sense of the dataset structure and fields.
+
+>
 
 ```sql
 -- Step 1.1: What date range does this dataset cover?
@@ -91,6 +94,19 @@ SELECT
 FROM sales;  
 -- Insight: Data is recorded at the item-level.
 ```
+
 >
 
+```sql
+-- Step 1.3: What does the overall sales performance look like?
+
+SELECT COUNT (*) AS total_order_count_all_period,
+   SUM (transaction_amount) AS total_revenue_all_period,
+   AVG (transaction_amount) AS avg_revenue_per_order_all_period,
+   MIN (transaction_amount) AS min_order_revenue_all_period,
+   MAX (transaction_amount) AS max_order_revenue_all_period
+   FROM sales;
+ ```
+<img width="956" height="94" alt="step 1 3 screenshot" src="https://github.com/user-attachments/assets/c579a7e5-bf6c-41d2-a8f7-e4e05cb0c10a" />
+🔑 Overall order values vary widely (20–900) despite an average of 275, indicating heterogeneous purchasing behavior, which led us to check whether product-level price differences contribute to this variation and isolate the impact of basket composition.
 
