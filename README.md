@@ -26,4 +26,5 @@ The project examines how revenue is formed across basket sizes, product roles, a
 >
 
 >The structure allows analysis at both the order level (basket size, order value) and the item level (menu mix, price positioning), while temporal fields enable daypart-based performance comparisons.
+>
 **📎 Data Source:** Kaggle – (https://www.kaggle.com/datasets/rajatsurana979/fast-food-sales-report)
