@@ -267,6 +267,65 @@ FROM sales;
 - Revenue sensitivity is higher to **pricing, availability, or margin changes** in a few key products.
 - Any **pricing experiment,** **promotion, or supply issue** affecting these revenue-heavy items will have an **outsized impact on total night revenue.**
 
+---
+
+```sql
+-- Step 4: How do transaction types differ in terms of order share and revenue contribution? 
+SELECT transaction_type,
+CAST(COUNT(*) * 100.0 / SUM(COUNT(*)) OVER() AS DECIMAL(5,2)) AS Order_share_pct_of_total_orders,
+CAST(SUM(transaction_amount) * 100.0 / SUM(SUM(transaction_amount)) OVER ()
+AS DECIMAL(5,2)) AS revenue_share_pct_of_total_revenue
+FROM sales
+GROUP BY transaction_type
+ORDER BY revenue_share_pct_of_total_revenue DESC;
+```
+<img width="569" height="102" alt="step 4 secreenshot" src="https://github.com/user-attachments/assets/4a989444-878b-4d1e-83c4-32716385589b" />
+
+🔑  Transaction types show **nearly proportional order and revenue shares**, indicating that the payment method does **not materially influence order value or basket behavior**.
+**🌟 Why it matters:**  This allows the business to focus optimization efforts on **menu structure, pricing, and peak-period execution**, without over-investing in transaction-type–specific strategies.
+
+---
+
+## III. Recommendations
+1️⃣ **Treat Night Hours as a Non-Negotiable Revenue Window**
+
+- Nighttime accounts for **~41% of total revenue**, making it the most financially exposed part of the day.
+- Performance stability during night hours should be treated **as a baseline requirement.** Any disruption in this window is likely to have **a disproportionate impact on total revenue.**
+
+**⚡ Action:** Prioritize staffing, inventory availability, and service reliability during night hours **before optimizing off-peak periods**.
+👉 *This is not about maximizing night sales further, but about minimizing downside risk in the most critical window.*
+
+**2️⃣ Actively Manage Product Dependency During Peak Revenue Hours**
+
+- At night, revenue is **highly concentrated**: approximately **65% of night revenue comes from three items** (Sandwich, Frankie, Cold Coffee), while unit volumes are relatively evenly spread across the menu.
+
+👉 *This indicates that some products act as revenue anchors, while others mainly support order completion and basket expansion.*
+
+**⚡ Action:**  Treat these items as **critical revenue dependencies.** 
+
+✔ Ensure zero stock-out tolerance at night to avoid direct revenue loss.
+
+✔ Avoid aggressive discounting on these products, as they already show strong demand and discounts are unlikely to meaningfully increase order volume, while directly diluting revenue.
+
+✔ Monitor their performance separately from volume-driven items to avoid misinterpreting performance signals.
+👉 *The goal is to reduce revenue volatility driven by concentration, not to push additional volume.*
+
+**3️⃣ Optimize the Menu by Role, Not by Rank**
+
+The analysis shows a clear distinction between:
+
+- **Volume-driven items** that increase basket size
+- **Higher-priced items** that shape revenue per order
+
+**⚡ Action:** Design promotions and menu placement around **functional roles**, rather than overall sales rank.
+
+✔ Use lower-priced, high-volume items to support order initiation and basket building.
+
+✔ Position higher-priced items as **value anchors** that lift average order value, rather than expecting them to drive volume.
+
+*👉 This allows each product to contribute according to its natural role within the basket, without forcing uniform performance expectations*
+
+
 
 
 
