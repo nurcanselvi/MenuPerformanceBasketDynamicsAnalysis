@@ -108,6 +108,7 @@ SELECT COUNT (*) AS total_order_count_all_period,
    FROM sales;
  ```
 <img width="956" height="94" alt="step 1 3 screenshot" src="https://github.com/user-attachments/assets/c579a7e5-bf6c-41d2-a8f7-e4e05cb0c10a" />
+
 🔑 Overall order values vary widely (20–900) despite an average of 275, indicating heterogeneous purchasing behavior, which led us to check whether product-level price differences contribute to this variation and isolate the impact of basket composition.
 
 >
