@@ -1,7 +1,9 @@
-# 🍔MenuPerformanceBasketDynamicsAnalysis
+# 🍔MenuPerformanceBasketDynamics
 The project examines how revenue is formed across basket sizes, product roles, and dayparts, translating item-level transactions into structured business insights.
 
 ---
+
+## I. Project Summary & Strategy
 
 ### 📊 Project Overview
 > This project examines one year of transactional sales data from a fast-food restaurant to understand **what truly drives revenue** — whether growth comes from higher order frequency, larger baskets, specific menu items, or particular operating hours.
@@ -59,3 +61,4 @@ The project examines how revenue is formed across basket sizes, product roles, a
 * **Semantic Precision:** Used strategic aliasing to distinguish identical metrics across different business scopes (e.g., total vs. segmented revenue).
 
 ---
+
