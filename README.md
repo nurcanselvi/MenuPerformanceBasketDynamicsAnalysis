@@ -73,6 +73,9 @@ The project examines how revenue is formed across basket sizes, product roles, a
 -- Step 1: View the sales table
 SELECT TOP 10 *
 FROM sales; 
+```
+<img width="931" height="252" alt="step 1 screenshot" src="https://github.com/user-attachments/assets/674491e0-41d8-4b85-ba95-31e5f3a02fb6" />
+
 
 -- Step 1.1: What date range does this dataset cover?
 SELECT 
@@ -87,6 +90,7 @@ SELECT
     COUNT(DISTINCT order_id) AS total_orders
 FROM sales;  
 -- Insight: Data is recorded at the item-level.
+```
 >
-<img width="931" height="252" alt="step 1 screenshot" src="https://github.com/user-attachments/assets/47d2b1bb-6adc-4961-8fef-0cb3525e572f" />
+
 
