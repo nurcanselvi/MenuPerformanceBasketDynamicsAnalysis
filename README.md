@@ -121,5 +121,21 @@ FROM sales
 GROUP BY item_name; --no product-level price variation
 ```
 <img width="361" height="209" alt="tep 1 4 screenshot" src="https://github.com/user-attachments/assets/c6c0542a-6bb2-434a-a18b-d43badab12f8" />
+
 🔑 Item prices are consistent across orders, indicating no discounts or campaigns.
+
+
+```sql
+-- Step 1.5: What does average basket size (items per order) look like?
+SELECT COUNT(*) AS order_row_count,
+SUM(quantity) AS total_units_sold_all_orders, 
+CAST(SUM(quantity) * 1.0 / COUNT(*) AS DECIMAL(10,2)) AS avg_items_per_order
+FROM sales;
+```
+<img width="456" height="74" alt="step 1 5 screenshot" src="https://github.com/user-attachments/assets/05e29e93-07a7-4628-b97f-6c6859d9b85f" />
+
+🔑 An average basket size of ~8 items suggests that customer purchases are structurally multi-item, making order-level performance highly sensitive to basket composition rather than individual item selection.
+🌟** Why it matters:**  With consistent item pricing, multi-item baskets imply that variation in order revenue is primarily **driven by basket composition,** not price fluctuations — justifying a shift toward item-level and basket-structure analysis.
+
+
 
