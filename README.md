@@ -69,9 +69,6 @@ The project examines how revenue is formed across basket sizes, product roles, a
 >
 
 ### 🧠 Analysis Steps
-> ### 🔍 Initial Data Exploration
-Before deep-diving into analysis, I validated the dataset's scope and granularity.
-
 ```sql
 -- Step 1: View the sales table
 SELECT TOP 10 *
@@ -90,3 +87,6 @@ SELECT
     COUNT(DISTINCT order_id) AS total_orders
 FROM sales;  
 -- Insight: Data is recorded at the item-level.
+>
+<img width="931" height="252" alt="step 1 screenshot" src="https://github.com/user-attachments/assets/47d2b1bb-6adc-4961-8fef-0cb3525e572f" />
+
