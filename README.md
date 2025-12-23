@@ -293,6 +293,7 @@ ORDER BY revenue_share_pct_of_total_revenue DESC;
 - Performance stability during night hours should be treated **as a baseline requirement.** Any disruption in this window is likely to have **a disproportionate impact on total revenue.**
 
 **⚡ Action:** Prioritize staffing, inventory availability, and service reliability during night hours **before optimizing off-peak periods**.
+
 👉 *This is not about maximizing night sales further, but about minimizing downside risk in the most critical window.*
 
 **2️⃣ Actively Manage Product Dependency During Peak Revenue Hours**
