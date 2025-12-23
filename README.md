@@ -171,5 +171,22 @@ FROM sales;
 >
 🌟** Why it matters:** Knowing that most sales come from big orders helps focus on menu planning, pricing, and staffing during busy periods.
 
+---
+
+```sql
+-- Step 2.1: Which items drive order traffic and sales volume?
+		SELECT item_name, item_type, COUNT(*) AS order_frequency, 
+		SUM(quantity) AS total_units_sold, 
+		CAST(SUM(quantity)* 1.0  / COUNT(*) AS DECIMAL(10,2)) AS avg_items_per_order 
+		FROM sales 
+		GROUP BY item_name, item_type 
+		ORDER BY total_units_sold DESC;
+```
+<img width="567" height="197" alt="step 2 1 screenshot" src="https://github.com/user-attachments/assets/f5e52f4a-991c-4d4d-acdc-0acf50c53623" />
+
+🔑 Cold coffee, Sugarcane juice, and Panipuri are the top **volume drivers**, while Sandwich consistently appears in larger quantities per order, acting as a **basket filler**. 
+
+**🌟 Why it matters:** This distinction between **volume drivers** and **basket fillers** is key for **understanding product-level contributions** within the menu and informs **menu planning** and **promotions.**
+
 
 
