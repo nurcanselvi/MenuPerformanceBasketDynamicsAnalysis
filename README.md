@@ -112,7 +112,7 @@ SELECT COUNT (*) AS total_order_count_all_period,
 🔑 Overall order values vary widely (20–900) despite an average of 275, indicating heterogeneous purchasing behavior, which led us to check whether product-level price differences contribute to this variation and isolate the impact of basket composition.
 
 >
-
+>
 ```sql
 -- Step 1.4: Are item prices consistent across orders?
 SELECT item_name, MIN(item_price) AS min_item_price, 
@@ -135,6 +135,7 @@ FROM sales;
 <img width="456" height="74" alt="step 1 5 screenshot" src="https://github.com/user-attachments/assets/05e29e93-07a7-4628-b97f-6c6859d9b85f" />
 
 🔑 An average basket size of ~8 items suggests that customer purchases are structurally multi-item, making order-level performance highly sensitive to basket composition rather than individual item selection.
+>
 🌟** Why it matters:**  With consistent item pricing, multi-item baskets imply that variation in order revenue is primarily **driven by basket composition,** not price fluctuations — justifying a shift toward item-level and basket-structure analysis.
 
 
