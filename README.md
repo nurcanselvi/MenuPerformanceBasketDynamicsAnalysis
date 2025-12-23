@@ -24,7 +24,4 @@ The project examines how revenue is formed across basket sizes, product roles, a
 ### 📖 Dataset Description
 > The dataset consists of 1,000 item-level transactions recorded between **April 2022** and **March 2023**, where each row represents a single order. Key columns include item details (item_name, item_price), order metrics (quantity, transaction_amount), and temporal/operational context (date, time_of_sale, transaction_type).
 >
-
->The structure allows analysis at both the order level (basket size, order value) and the item level (menu mix, price positioning), while temporal fields enable daypart-based performance comparisons.
->
 **📎 Data Source:** Kaggle – (https://www.kaggle.com/datasets/rajatsurana979/fast-food-sales-report)
