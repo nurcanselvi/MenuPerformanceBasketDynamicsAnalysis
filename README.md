@@ -95,7 +95,7 @@ FROM sales;
 -- Insight: Data is recorded at the item-level.
 ```
 
->
+---
 
 ```sql
 -- Step 1.3: What does the overall sales performance look like?
@@ -111,8 +111,8 @@ SELECT COUNT (*) AS total_order_count_all_period,
 
 🔑 Overall order values vary widely (20–900) despite an average of 275, indicating heterogeneous purchasing behavior, which led us to check whether product-level price differences contribute to this variation and isolate the impact of basket composition.
 
->
->
+---
+
 ```sql
 -- Step 1.4: Are item prices consistent across orders?
 SELECT item_name, MIN(item_price) AS min_item_price, 
@@ -124,6 +124,7 @@ GROUP BY item_name; --no product-level price variation
 
 🔑 Item prices are consistent across orders, indicating no discounts or campaigns.
 
+---
 
 ```sql
 -- Step 1.5: What does average basket size (items per order) look like?
@@ -137,6 +138,38 @@ FROM sales;
 🔑 An average basket size of ~8 items suggests that customer purchases are structurally multi-item, making order-level performance highly sensitive to basket composition rather than individual item selection.
 >
 🌟** Why it matters:**  With consistent item pricing, multi-item baskets imply that variation in order revenue is primarily **driven by basket composition,** not price fluctuations — justifying a shift toward item-level and basket-structure analysis.
+
+---
+
+```sql
+	 -- Step 1.6: How are orders and revenue distributed across basket size segments, and which basket types truly drive business performance?
+        SELECT CASE 
+        WHEN quantity BETWEEN 1 AND 3 THEN 'Individual Orders (1–3 items)'
+        WHEN quantity BETWEEN 4 AND 6 THEN 'Small Group Orders (4–6 items)'
+        ELSE 'Bulk / Group Orders (7+ items)'
+        END AS basket_size_segment,
+		SUM(transaction_amount) AS total_revenue_in_segment,
+		CAST( SUM(transaction_amount) * 100.0 / SUM(SUM(transaction_amount)) OVER () AS DECIMAL(5,2))
+		AS revenue_share_pct_of_total,
+
+		COUNT(*) AS orders_in_segment,
+        CAST(COUNT(*) * 100.0 / SUM(COUNT(*)) OVER () AS DECIMAL(5,2)) 
+        AS order_share_pct_of_total
+		FROM sales
+        GROUP BY 
+
+		CASE 
+        WHEN quantity BETWEEN 1 AND 3 THEN 'Individual Orders (1–3 items)'
+        WHEN quantity BETWEEN 4 AND 6 THEN 'Small Group Orders (4–6 items)'
+        ELSE 'Bulk / Group Orders (7+ items)'
+        END
+        ORDER BY total_revenue_in_segment DESC;
+```
+<img width="829" height="108" alt="step 1 6 screenshot" src="https://github.com/user-attachments/assets/3e20035b-ec2d-4dc8-9973-db9885858e75" />
+
+🔑  Large-basket orders (7+ items) represent ~61% of total orders and account for ~84% of total revenue, **making them the dominant driver of revenue in the system.**
+>
+🌟** Why it matters:** Knowing that most sales come from big orders helps focus on menu planning, pricing, and staffing during busy periods.
 
 
 
