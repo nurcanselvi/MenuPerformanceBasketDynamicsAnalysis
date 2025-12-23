@@ -110,3 +110,15 @@ SELECT COUNT (*) AS total_order_count_all_period,
 <img width="956" height="94" alt="step 1 3 screenshot" src="https://github.com/user-attachments/assets/c579a7e5-bf6c-41d2-a8f7-e4e05cb0c10a" />
 🔑 Overall order values vary widely (20–900) despite an average of 275, indicating heterogeneous purchasing behavior, which led us to check whether product-level price differences contribute to this variation and isolate the impact of basket composition.
 
+>
+
+```sql
+-- Step 1.4: Are item prices consistent across orders?
+SELECT item_name, MIN(item_price) AS min_item_price, 
+MAX(item_price) AS max_item_price  
+FROM sales
+GROUP BY item_name; --no product-level price variation
+```
+<img width="361" height="209" alt="tep 1 4 screenshot" src="https://github.com/user-attachments/assets/c6c0542a-6bb2-434a-a18b-d43badab12f8" />
+🔑 Item prices are consistent across orders, indicating no discounts or campaigns.
+
