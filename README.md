@@ -309,6 +309,7 @@ ORDER BY revenue_share_pct_of_total_revenue DESC;
 ✔ Avoid aggressive discounting on these products, as they already show strong demand and discounts are unlikely to meaningfully increase order volume, while directly diluting revenue.
 
 ✔ Monitor their performance separately from volume-driven items to avoid misinterpreting performance signals.
+
 👉 *The goal is to reduce revenue volatility driven by concentration, not to push additional volume.*
 
 **3️⃣ Optimize the Menu by Role, Not by Rank**
